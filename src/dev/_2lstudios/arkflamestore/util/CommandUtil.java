@@ -13,8 +13,7 @@ public class CommandUtil {
     private final Plugin plugin;
     private final Server server;
     private final CommandSender consoleSender;
-    private static final String BROADCAST_ACTION = "broadcast|";
-    private static final String COMMAND_ACTION = "command|";
+    private static final String BROADCAST_COMMAND = "broadcast ";
 
     public CommandUtil(final Logger logger, final Plugin plugin, final Server server) {
         this.logger = logger;
@@ -26,15 +25,10 @@ public class CommandUtil {
     public void executeCommand(final String command) {
         final String coloredCommand = ChatColor.translateAlternateColorCodes('&', command);
 
-        if (coloredCommand.startsWith(BROADCAST_ACTION)) {
-            server.broadcast("", coloredCommand.replace(BROADCAST_ACTION, ""));
-        } else if (coloredCommand.startsWith(COMMAND_ACTION)) {
-            if (server.isPrimaryThread()) {
-                server.dispatchCommand(consoleSender, coloredCommand.replace(COMMAND_ACTION, ""));
-            } else {
-                server.getScheduler().runTask(plugin,
-                        () -> server.dispatchCommand(consoleSender, coloredCommand.replace(COMMAND_ACTION, "")));
-            }
+        if (coloredCommand.startsWith(BROADCAST_COMMAND)) {
+            server.broadcast(coloredCommand.replace(BROADCAST_COMMAND, ""), "");
+        } else {
+            server.dispatchCommand(consoleSender, coloredCommand);
         }
 
         logger.log(Level.INFO, "Executed command from Store: {0}", coloredCommand);
