@@ -19,6 +19,7 @@ import io.socket.client.Socket;
 
 public class ArkFlameStore extends JavaPlugin {
 	public static String BACKEND_URL;
+	public static String TOKEN;
 	private Socket socket;
 
 	@Override
@@ -27,6 +28,7 @@ public class ArkFlameStore extends JavaPlugin {
 		final YamlConfiguration config = configUtil.get("config.yml");
 
 		BACKEND_URL = config.getString("backend_url");
+		TOKEN = config.getString("token");
 
 		try {
 			final Server server = getServer();

@@ -18,7 +18,6 @@ public class ConnectedListener implements Listener {
     @Override
     public void call(final Object... args) {
         logger.info("Connected to " + ArkFlameStore.BACKEND_URL + ". Trying to authenticate.");
-        // TODO: Authentication key removed from repo
-	    socket.emit("auth", null);
+	    socket.emit("auth", ArkFlameStore.TOKEN);
     }
 }
