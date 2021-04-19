@@ -20,15 +20,20 @@ import io.socket.client.Socket;
 public class ArkFlameStore extends JavaPlugin {
 	public static String BACKEND_URL;
 	public static String TOKEN;
+	public static String SERVER_NAME;
 	private Socket socket;
 
 	@Override
 	public void onEnable() {
 		final ConfigUtil configUtil = new ConfigUtil(this);
-		final YamlConfiguration config = configUtil.get("config.yml");
+
+		configUtil.create("%datafolder%/config.yml", "config.yml");
+
+		final YamlConfiguration config = configUtil.get("%datafolder%/config.yml");
 
 		BACKEND_URL = config.getString("backend_url");
 		TOKEN = config.getString("token");
+		SERVER_NAME = config.getString("server_name");
 
 		try {
 			final Server server = getServer();
