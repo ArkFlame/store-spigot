@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 
-import dev._2lstudios.arkflamestore.util.CommandUtil;
+import dev._2lstudios.arkflamestore.utils.CommandUtil;
 import io.socket.emitter.Emitter.Listener;
 
 public class RunCommandsListener implements Listener {

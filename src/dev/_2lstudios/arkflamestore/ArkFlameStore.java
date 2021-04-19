@@ -4,6 +4,7 @@ import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import org.bukkit.Server;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import dev._2lstudios.arkflamestore.listeners.ConnectedListener;
@@ -11,16 +12,22 @@ import dev._2lstudios.arkflamestore.listeners.DisconnectedListener;
 import dev._2lstudios.arkflamestore.listeners.AuthenticationSuccessListener;
 import dev._2lstudios.arkflamestore.listeners.ConnectErrorListener;
 import dev._2lstudios.arkflamestore.listeners.RunCommandsListener;
-import dev._2lstudios.arkflamestore.util.CommandUtil;
+import dev._2lstudios.arkflamestore.utils.CommandUtil;
+import dev._2lstudios.arkflamestore.utils.ConfigUtil;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 
 public class ArkFlameStore extends JavaPlugin {
-	public static final String BACKEND_URL = "http://192.168.0.11:6501";
+	public static String BACKEND_URL;
 	private Socket socket;
 
 	@Override
 	public void onEnable() {
+		final ConfigUtil configUtil = new ConfigUtil(this);
+		final YamlConfiguration config = configUtil.get("config.yml");
+
+		BACKEND_URL = config.getString("backend_url");
+
 		try {
 			final Server server = getServer();
 			final Logger logger = getLogger();

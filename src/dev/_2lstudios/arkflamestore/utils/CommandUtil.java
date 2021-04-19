@@ -1,4 +1,4 @@
-package dev._2lstudios.arkflamestore.util;
+package dev._2lstudios.arkflamestore.utils;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
